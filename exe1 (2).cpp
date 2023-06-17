@@ -1,11 +1,11 @@
 #include <iostream>
 #include <fstream>
-#include <Windows.h>
+#include <limits>
 using namespace std;
 
 struct pessoa{
 	string nome;
-	int cpf;
+	string cpf;
 	string tipoSanguineo;
 	int porcentVermelho;
 	int porcentBranco;
@@ -16,18 +16,17 @@ void cadastrarpessoa(fstream& arquivoOut) {
 
     cout << "** CADASTRO DE PESSOA **" << endl;
     cout << "Nome: " << endl;
-    cin >> novaPessoa.nome;
+    getline(arquivoOut, novaPessoa.nome, ',');
     cout << "CPF: ";
-    cin >> novaPessoa.cpf;
+    getline(arquivoOut, novaPessoa.cpf, ',');
     cout << "Tipo Sanguineo: "<< endl;
-    cin.ignore();
     getline(cin, novaPessoa.tipoSanguineo);
+    arquivoOut>> novaPessoa.porcentVermelho;
     cout << "Porcentagem de Globulos Vermelhos: " << endl;
-    cin>> novaPessoa.porcentVermelho;
+    arquivoOut >> novaPessoa.porcentBranco;
     cout << "Porcentagem de Globulos Brancos: " << endl;
-    cin >> novaPessoa.porcentBranco;
+    arquivoOut >> novaPessoa.densidade;
     cout << "Densidade do sangue: " << endl;
-    cin >> novaPessoa.densidade;
 
 
     arquivoOut.open("output/animais_exoticos.txt", ios::out | ios::app);
@@ -125,7 +124,6 @@ void alterarpessoa(fstream& arquivo){
 
 
 int main() {
-    SetConsoleOutputCP(CP_UTF8);
     fstream arquivo("animais_exoticos.txt");
 
     if (!arquivo) {
@@ -140,6 +138,7 @@ int main() {
         cout << "2. Buscar pessoa" << endl;
         cout << "3. Alterar dados de uma pessoa" << endl;
         cout << "4. Excluir dados de uma pessoa" << endl;
+	cout << "5. Sair" << endl;
         cout << "Escolha uma opção: ";
         cin >> opcao;
 
