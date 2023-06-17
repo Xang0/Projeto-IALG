@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <limits>
+#include <Windows.h>
 using namespace std;
 
 struct pessoa{
@@ -125,6 +126,7 @@ void alterarpessoa(fstream& arquivo){
 
 
 int main() {
+    SetConsoleOutputCP(CP_UTF8);
     fstream arquivo("animais_exoticos.txt");
 
     if (!arquivo) {
